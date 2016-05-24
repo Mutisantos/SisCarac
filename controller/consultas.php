@@ -407,6 +407,7 @@
 	/**
      *  funcion guardarFormulario1Adm
 	 *  Guardo un nuevo registro del primer formulario con todos los campos requeridos
+	 *  @param id: cedula del encuestado como llave primaria del resto de datos del formulario
      */
 	function guardarFormulario1Adm($id, $nombre, $parentesco, $estadocivil, $edad, $genero, $telefono, $celular, $direccionnueva, $upz, $barrio, $estrato, $numerohogares, $tiempobarrio, $fechaEncuesta, $HoraInicioEncuesta, $HoraFinEncuesta, $encuestador, $carrera, $supervisor, $estado, $coordinadorProsofi ){
 
@@ -467,7 +468,13 @@
 		return $nuevoUsuarioId;
 
 	}
-
+	/**
+     *  funcion guardarFormulario2
+	 *  Guardo los campos de ubicación geográfica en el pais
+	 *  Actualmente no se esta utilizando
+	 *  @param id: cedula del encuestado
+	 *  
+     */
 	function guardarFormulario2($id,$lugarDepartamento,$lugarCiudad, $tiempoEnLocalidad){
 		$con = conectar();
 
@@ -478,7 +485,13 @@
 		ON DUPLICATE KEY UPDATE id='".$id."' , lugarDepartamento='".$lugarDepartamento."' , lugarCiudad='".$lugarCiudad."' , tiempoEnLocalidad='".$tiempoEnLocalidad."' ";
 		mysqli_query($con, $sql2) or  die();
 	}
-
+	/**
+     *  funcion guardarFormulario2
+	 *  Guardo los campos de ubicación de composición familiar del encuestado
+	 *  se ingresan los datos por cada uno de los familiares y la llave primaria se da por
+	 *  @param id: cedula del encuestado
+	 *  
+     */
 	function guardarFormulario2Composicion($id, $nombre, $documento, $sexo, $edad, $fechaN, $estadoC, $condicionEspecial, $etnia, $parentesco, $escolaridad, $ocupacion, $actividad, $ingresos, $aporteIngresos, $enfermedades, $discapacidad, $segSocial, $sisben, $cajaComp, $subEstado, $lugarCiudad, $lugarDepartamento){
 		$con = conectar();
 
@@ -489,9 +502,12 @@
 		ON DUPLICATE KEY UPDATE nombre='".$nombre."' , documento='".$documento."' , sexo='".$sexo."' , edad='".$edad."' , fechaN='".$fechaN."' , estadoC='".$estadoC."' , condicionEspecial='".$condicionEspecial."' , etnia='".$etnia."' , parentesco='".$parentesco."' , escolaridad='".$escolaridad."' , ocupacion='".$ocupacion."' , actividad='".$actividad."' , ingresos='".$ingresos."' , aporteIngresos='".$aporteIngresos."' , enfermedades='".$enfermedades."' , discapacidad='".$discapacidad."' , segSocial='".$segSocial."' , sisben='".$sisben."' , cajaComp='".$cajaComp."' , subEstado='".$subEstado."' , lugarDepartamento='".$lugarDepartamento."'  , lugarCiudad='".$lugarCiudad."' ";
 		mysqli_query($con, $sql2) or  die();
 	}
-
-
-	//function guardarFormulario3($id, , $P11, $P21, $P22, $P31, $P41,  $razones, $otro11, $otro21,  $otro22,  $otro31){
+	/**
+     *  funcion guardarFormulario3
+	 *  Guardo los campos de la parte urbana del sector donde habita el encuestado
+	 *  @param id: cedula del encuestado como llave primaria
+	 *  
+     */
 	function  guardarFormulario3( $id , $P1Parques  , $P1Hospitales  , $P1Colegios  , $P1Iglesias  , $P1SedeAC  , $P1Jardines  , $P1Otro  , $P2Utiliza  , $P3Aguas  , $P3Canos  , $P3Botadero  , $P3Enmontadas  , $P3Otro  , $P4Conforme  , $P5UtilizaSalud  , $P5Cual  , $P7UtilizaColegio  , $P8Preescolar  , $P8Primaria  , $P8Media  , $P8Bachillerato  , $P8Tecnico  , $P9CalificaEducacion  , $P10Opcion1  , $P10Usa1  , $P10Opcion2  , $P10Usa2  , $P10Opcion3  , $P10Usa3  , $P10Opcion4  , $P10Usa4  , $P11CostoTrans  , $P12TiempoTrans  , $P13CalificaPolicia  , $P14CalificaSeguridad  , $P15Madres  , $P15Clubes  , $P15Etnicas  , $P15Juntas  , $P15Comedores  , $P15Culturales  , $P15Otro  , $P16FamiliaParte  , $P16FamiliaParteCual  , $P17Logro  , $P17LogroCual  , $P18Calidad , $P18CalidadPorque ){
 		$con = conectar();
 
@@ -507,7 +523,12 @@
 
 		echo $sql2;
 	}
-
+	/**
+     *  funcion guardarFormulario4
+	 *  Guardo los campos de la parte de costos y vivienda 
+	 *  @param id: cedula del encuestado como llave primaria
+	 *  
+     */
 	function guardarFormulario4($id , $arriendo , $alimentacion , $gas , $acueducto , $luz , $telefono , $internet , $tv , $transporte , $universidad , $colegios , $medico , $manutencion , $recreacion , $bancariosD , $bancarios , $particularesD , $particulares , $ahorro , $otrosGastos , $totalMensual , $tenencia , $usos , $cualNegocio , $lote , $tejaZinc , $ladriBloquePiedra , $tierra , $ladrilloVista , $casalote , $tejaFibrocemento , $maderaPulida , $cementoGravilla , $panete , $casa , $tejaPlastica , $adobeTapia , $maderaBurdaTabla , $madera , $cuartoOtra , $placa , $Bahareque , $balLAdSin , $zinc , $rancho , $maderaBurda , $naderaPulida , $CiTeCaLaPl , $Tapete , $otro1 , $otro2 , $otro3 , $otro4 , $otro5 , $oSinPanete , $oSinPintar , $oTerminada , $salaT , $salaS , $comedorT , $comedorS , $banosT , $banosS , $cocinaT , $cocinaS , $habitacionesT , $habitaacionesS , $pisosT , $pisosS , $personasN , $metrosN , $cocinaComp ){
 
 		$con = conectar();
@@ -519,7 +540,12 @@
 		echo $sql2;
 		mysqli_query($con, $sql2) or  die(mysqli_error($con));
 	}
-
+	/**
+     *  funcion guardarFormulario5
+	 *  Guardo los campos de la parte de costos y preguntas adicionales 
+	 *  @param id: cedula del encuestado como llave primaria
+	 *  
+     */
 	function guardarFormulario5($id, $P26Ahorro, $P26Credito, $P26Subsidio, $P26Prestamo, $P26Cesantias, $P26Otro, $P27Mejoramiento, $P28Subsidio, $P29Porque, $P30LugarO1, $P30Ano1, $P30LugarD1, $P30Razon1, $P30LugarO2, $P30Ano2, $P30LugarD2, $P30Razon2, $P30LugarO3, $P30Ano3, $P30LugarD3, $P30Razon3, $P30LugarO4, $P30Ano4, $P30LugarD4, $P30Razon4, $P31ConformeVivienda, $P32Porque, $P33Extrana, $P34Cambios, $P35Dignamente, $P36Porque, $P37Mascotas, $P38Problemas, $P39PersonaConvi, $P40Solucion, $P40Otro, $P41CalidadVida, $P42Porque, $P43CalidadVida, $P44Porque){
 
 		$con = conectar();
@@ -531,7 +557,12 @@
 	 	echo $sql2;
 		mysqli_query($con, $sql2) or  die();
 	}
-
+	/**
+     *  funcion guardarFormulario6
+	 *  Guardo las observaciones y comentarios de seguimiento de la encuesta 
+	 *  @param id: cedula del encuestado como llave primaria
+	 *  
+     */
 	function guardarFormulario6($id,$observaciones,$seguimiento){
 		$con = conectar();
 
@@ -592,7 +623,12 @@ function guardarOdontologia_Form4($id, $localidad, $barrio, $upz){
 }
 //consultas panel administrador
 
-//Buscar por cedula o por nombre
+	/**
+     *  funcion buscarCedulaNombre
+	 *  Busco un usuario dado la cedula o el nombre, o ambas
+	 *  @param id: numero de cedula del encuestado como llave primaria
+	 *  @param string: nombre del encuestado como llave primaria
+     */
 function buscarCedulaNombre($numero, $nombre){
 
         $con = conectar();
