@@ -9,6 +9,10 @@
  -->
  <?php
  session_start();
+  
+  /**
+  * inicio de sesión en el sistema con una cuenta autenticada y registrada
+  */
   include "controller/consultas.php";
   isLogged();
   print_r($_SESSION);

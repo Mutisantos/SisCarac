@@ -1632,7 +1632,14 @@
       $id = $_SESSION["usuario"]['encuestado'];
 
       include("controller/consultas.php");
-      // encuestadoLogged();
+       /**
+         * 
+         * Llamado de la clase de consultas.php para traer el método que carga cada uno de 
+         * los familiares del encuestado, trae a todos los familiares basados en la cédula 
+         * de ciudadanía que viene siendo el id que se pasa desde la vista anterior
+         * 
+         * @return array[] arreglo de familiares que se van a desplegar en la tabla correspondiente
+         */
 
       $array = llenarFormulario2Composicion( $id );
 
@@ -1644,9 +1651,6 @@
             foreach ($array as $familiar) {
                 $conteo++;
                
-//index,  nombre,  documento,  sexo,  edad,  fechaN,  estadoC,  condicionEspecial,  etnia,  parentesco,  escolaridad,  ocupacion,  actividad,  ingresos,  aporteIngresos,  enfermedades,  discapacidad,  segSocial,  sisben,  cajaComp,  subEstado,  lugarCiudad,  lugarDepartamento
-
-
                echo('<script> cargarForm2Composicion("'.$conteo.'","'.$familiar['nombre'].'" ,
                                                      "'.$familiar['documento'].'","'.$familiar['sexo'].'" ,
                                                      "'.$familiar['edad'].'","'.$familiar['fechaN'].'" ,

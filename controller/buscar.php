@@ -1,11 +1,17 @@
 <!-- <script src="../1_InformacionPrincipal.html" type="text/javascript" /> -->
 
 <?php 
-// buscar usuario por su cedula/documento de identidad
+	
+
 	include 'consultas.php';
 	include 'utils.php';
 	require_once('../1_InformacionPrincipal.php');
-	
+	/**
+ 	*  Controlador de busquedas en la base de datos MySQL de la plataforma AAMP
+    *  Se utiliza para hacer la busqueda de un encuestado dada la cédula del mismo y poder cargar todos los datos 
+    *  demográficos del encuestado y poder mostrarlo al inicio del formulario. Da aviso tambien en caso que no se 
+    *  encuentre la cedula
+    */
 
 	$cedula=$_POST['cedula'];
 	

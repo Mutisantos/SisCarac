@@ -633,19 +633,10 @@
 <script type="text/javascript">
 
 
-//mediante la libreria jQuery se cargan los select option 
-	/*function cargarMultiples(valores, nombreSelector){
-		// var values="Parques,Hospitales";
-		var values = valores;
-		$.each(values.split(","), function(i,e){
-	    	$("#"+nombreSelector+" option[value='" + e + "']").prop("selected", true);
-		});	
-	}*/
 
 
 
-  //funcion para cargar formulario 3
-  //function cargarForm3(  P11, P21, P22, P31, P41, arriendo, razones, otro11, otro21, otro22, otro31) {
+
   function cargarForm3( P1Parques, P1Hospitales, P1Colegios, P1Iglesias, P1SedeAC, P1Jardines, P1Otro, P2Utiliza, P3Aguas, P3Canos, P3Botadero, P3Enmontadas, P3Otro, P4Conforme, P5UtilizaSalud, P5Cual, P7UtilizaColegio, P8Preescolar, P8Primaria, P8Media, P8Bachillerato, P8Tecnico, P9CalificaEducacion, P10Opcion1, P10Usa1, P10Opcion2, P10Usa2, P10Opcion3, P10Usa3, P10Opcion4, P10Usa4, P11CostoTrans, P12TiempoTrans, P13CalificaPolicia, P14CalificaSeguridad, P15Madres, P15Clubes, P15Etnicas, P15Juntas, P15Comedores, P15Culturales, P15Otro, P16FamiliaParte, P16FamiliaParteCual, P17Logro, P17LogroCual, P18Calidad, P18CalidadPorque){
     var formulario = document.form3; 
     //cada Pregunta es cargada en el formulario, si el formulario cambia usar Find and Replace de cualqueir editor de texto
@@ -728,10 +719,14 @@
 
 
 
- 	//buscar si el usuario ya existe para cargar sus datos
+ 	/**
+    * llamado a la funcion de llenar formulario 3 que carga cada una de las respuestas en 
+	* la sección 3 de la encuesta que corresponde a la sección Urbana y Social, que son preguntas 
+	* la mayoria de si/no sobre elementos que componen el sector en el que habita el encuestado
+    * @return array[] cada una de las respuestas obtenidas por cada pregunta
+    */
 	$array = llenarFormulario3( $id );
 	
-	// echo $array['id'],$array['P11'],$array['P21'],$array['P22'],$array['P31'],$array['P41'],$array['arriendo']; 
     if($array!=0)
     {
     	echo('<script>

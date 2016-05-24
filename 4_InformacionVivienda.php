@@ -501,8 +501,12 @@
    	//validar que exista un id para el usuario encuestado
 	encuestadoLogged();
 
-
- 	//buscar si el usuario ya existe para cargar sus datos
+ 	/**
+    * llamado a la funcion de llenar formulario 4 que carga cada una de las respuestas en 
+	* la sección 4 de la encuesta que corresponde a la sección de Vivienda y gastos
+	* siendo elementos de la estructura fisica de la casa y los costos dentro de esta
+    * @return array[] cada una de los campos obtenidos por cada registro del encuestado
+    */
 	$array = llenarFormulario4( $id );
 	
     if($array!=0)

@@ -424,7 +424,11 @@ function cargarMultiples(valores, nombreSelector){
   	
   	$id = $_SESSION['usuario']['encuestado'];
 
- 	//buscar si el usuario ya existe para cargar sus datos
+  /**
+  * llamado a la funcion de llenar formulario 5 que carga cada una de las respuestas en 
+  * la sección 5 de la encuesta que corresponde a la sección de Socioculturales y Gastos del encuestado
+  * @return array[] ccada una de las respuestas por pregunta
+  */
 	$array = llenarFormulario5( $id );
 	
     if($array!=0)

@@ -7,7 +7,11 @@
   Formato de caracterización de la comunidad Prosofi
  -->
 <?php
-	//crear conexion con la base de datos
+	/**
+     *  Funcion Conectar 
+     *  Establece la conexión con MySQL a través de PHP 
+     *  Si se desea trabajar de manera local se debe comentar la segunda linea y descomentarear la primera
+     */
 	function conectar(){
 		// mysqli_connect("hosting","usuario","contrasena","nombreBaseDatos")
 		$sqlcon = mysqli_connect("localhost","root",/*"PROSOFI2015CAR"*/"","test") or die ("no se pudo conectar a mysql");
@@ -15,7 +19,10 @@
 		return $sqlcon;
 	}
 
-	//validar que se haya generado un id para el encuestado
+	/**
+     *  funcion encuestado Logged
+     *  Verifica que el usuario corresponde a un encuestador
+     */
 	function encuestadoLogged(){
 		$id = $_SESSION['usuario']['encuestado'];
 
@@ -25,7 +32,10 @@
 	   		header("Location:/assets/menuEncuestador.php");
 	   	}
 	}
-
+	/**
+     *  funcion encuestado isLogged
+     *  verifica que el usuario esté loggeado en el sistema
+     */
 	function isLogged(){
 		@session_start();
 		if(!isset($_SESSION["usuario"])){
@@ -42,6 +52,10 @@
 		return true;
 	}
 
+	/**
+     *  funcion login
+     *  Inicia sesion del usuario dado el email y su clave
+     */
 	function login($email,$clave){
 		@session_start();
 		//retorna conexcion a la base de datos
@@ -98,7 +112,10 @@
 		//Close connection
     	mysql_close($connection) or die ("Unexpected Error!!");
 	}
-
+	/**
+     *  funcion existeAdmn
+     *  Determina si además, el usuario no es uno normal sino uno administrativo
+     */
 	function existeAdmn($correo){
 
         $con = conectar();
@@ -115,7 +132,12 @@
 
 		return true;
 	}
-	// valida la existencia de la cedula en la base de datos
+
+	/**
+     *  funcion existe
+     *  Valida la existencia de la cedula en la base de datos
+     *  @param int cedula: la cedula del encuestado
+     */
 	function existe($cedula){
 
         $con = conectar();
@@ -132,7 +154,14 @@
 
 		return true;
 	}
-
+	/**
+     *  funcion registrarEncuestador
+     *  Registra a un encuestador en la base de datos (usuario normal)
+     *  @param string nombre: la nombre del encuestador
+     *  @param int cedula: la cedula del encuestador
+     *  @param string clave: clave cifrada del encuestador
+     *  @param string email: correo del encuestador
+     */
 	function registrarEncuestador($nombre, $cedula, $clave, $email){
 
 		$con = conectar();
@@ -144,7 +173,14 @@
 		mysqli_query($con, $sql2) or  die();
 
 	}
-
+	/**
+     *  funcion registrarAdministrador
+     *  Registra a un administrador en la base de datos 
+     *  @param string nombre: la nombre del encuestador
+     *  @param int cedula: la cedula del encuestador
+     *  @param string clave: clave cifrada del encuestador
+     *  @param string email: correo del encuestador
+     */
 	function registrarAdministrador($nombre, $cedula, $clave, $email){
 
 		$con = conectar();
@@ -155,9 +191,11 @@
 		$sql2 = "INSERT INTO administrador (`correo`, `clave`) VALUES ('".$email."', '".$clave."');";
 		mysqli_query($con, $sql2) or  die();
 	}
-
-
-	//buscar encuestado por cedula en el menu de Encuestador
+	/**
+     *  funcion registrarAdministrador
+     *  buscar encuestado por cedula en el menu de Encuestador 
+     *  @param int numero: la nombre del encuestador
+     */
 	function buscarCedula($numero){
 
 		$con = conectar();
@@ -170,8 +208,12 @@
 
 		return $row['id'];
 	}
-
-	//Obtengo todos los valores de identificacion que coincidan con el numero de cedula suministrado
+	/**
+     *  funcion buscarCedulaComposicion
+     *  Obtengo todos los valores de identificacion que coincidan con el numero de cedula suministrado 
+     *  Es decir, busco todos los familiares del encuestado
+     *  @param int numero: la nombre del encuestador
+     */
 
 	function buscarCedulaComposicion($numero){
 
@@ -210,9 +252,11 @@
 	}
 
 
-
-
-	// buscar datos de formulario 1 de caracterizacion con el id de usuario (no la cédula)
+	/**
+     *  funcion llenarFormulario1
+     * buscar datos de formulario 1 de caracterizacion con el id de usuario (la cedula)
+     *  @param int id: la cedula del encuestado
+     */
 	function llenarFormulario1($id){
 
 		$con = conectar();
@@ -225,8 +269,11 @@
 		//print_r($sql);
 		return $row;
 	}
-
-	//buscar los datos de la sección sociodemográfica con el id del usuario (no la cédula)
+	/**
+     *  funcion llenarFormulario2
+     *  buscar los datos de la sección sociodemográfica con el id del encuestado/cedula
+     *  @param int id: la cedula del encuestado
+     */
 	function llenarFormulario2($id){
 
 		$con = conectar();
@@ -240,9 +287,13 @@
 		else
 			return 0;
 	}
+	/**
+     *  funcion llenarFormulario2composicion
+	 *  llenar formulario 2 retrae datos de una tabla incorrecta, se crea este método para solucionarlo.
+	 *  Este metodo obtiene los datos del núcleo familiar del encuestado y se muestra en los indicadores sociodemográficos
+     *  @param int id: la cedula del encuestado
+     */
 
-	//llenar formulario 2 retrae datos de una tabla incorrecta, se crea este método para solucionarlo.
-	//Este metodo obtiene los datos del núcleo familiar del encuestado y se muestra en los indicadores sociodemográficos
 	function llenarFormulario2composicion($id){
 
 		$con = conectar();
@@ -270,15 +321,18 @@
 			//return 0;
 	}
 
-
-
-
+	/**
+     *  funcion llenarFormulario3
+	 *  llenar formulario 3 retrae datos de la tabla correspondiente.
+	 *  Este metodo obtiene los datos referentes a la pagina 3 de la encuesta
+     *  @param int id: la cedula del encuestado
+     */
 	function llenarFormulario3($id){
 
 		$con = conectar();
 
 		$sql = "SELECT * FROM form3 WHERE id = '".mysqli_real_escape_string($con ,$id)."' " ;
-		// echo $sql;
+	
 		$query = mysqli_query($con, $sql) or die (mysqli_error($con));
 		$row = mysqli_fetch_array($query);
 
@@ -288,7 +342,12 @@
 			return 0;
 	}
 
-
+	/**
+     *  funcion llenarFormulario4
+	 *  llenar formulario 4 retrae datos de la tabla
+	 *  Este metodo obtiene los datos referentes a la pagina 4 de la encuesta
+     *  @param int id: la cedula del encuestado
+     */
 
 	function llenarFormulario4($id){
 
@@ -305,7 +364,12 @@
 			return 0;
 	}
 
-
+	/**
+     *  funcion llenarFormulario5
+	 *  llenar formulario 5 retrae datos de la tabla
+	 *  Este metodo obtiene los datos referentes a la pagina 5 de la encuesta
+     *  @param int id: la cedula del encuestado
+     */
 	function llenarFormulario5($id){
 
 		$con = conectar();
@@ -320,6 +384,12 @@
 		else
 			return 0;
 	}
+	/**
+     *  funcion llenarFormulario6
+	 *  llenar formulario 6 retrae datos de la tabla
+	 *  Este metodo obtiene los datos referentes a la pagina 6 de la encuesta
+     *  @param int id: la cedula del encuestado
+     */
 	function llenarFormulario6($id){
 
 		$con = conectar();
@@ -334,6 +404,10 @@
 		else
 			return 0;
 	}
+	/**
+     *  funcion guardarFormulario1Adm
+	 *  Guardo un nuevo registro del primer formulario con todos los campos requeridos
+     */
 	function guardarFormulario1Adm($id, $nombre, $parentesco, $estadocivil, $edad, $genero, $telefono, $celular, $direccionnueva, $upz, $barrio, $estrato, $numerohogares, $tiempobarrio, $fechaEncuesta, $HoraInicioEncuesta, $HoraFinEncuesta, $encuestador, $carrera, $supervisor, $estado, $coordinadorProsofi ){
 
 		$nuevoUsuarioId = $id;
@@ -347,7 +421,10 @@
 		return $nuevoUsuarioId;
 
 	}
-
+	/**
+     *  funcion guardarFormulario1
+	 *  Guardo un nuevo registro del primer formulario con todos los campos requeridos
+     */
 	function guardarFormulario1($nombre, $parentesco, $estadocivil, $edad, $genero, $cedula, $telefono, $celular, $direccionnueva, $upz, $barrio, $estrato, $numerohogares, $tiempobarrio, $fechaEncuesta, $HoraInicioEncuesta, $HoraFinEncuesta, $encuestador, $carrera, $supervisor, $estado, $coordinadorProsofi ){
 
 		$nuevoUsuarioId = buscarCedula($cedula);

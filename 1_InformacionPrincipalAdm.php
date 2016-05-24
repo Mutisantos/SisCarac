@@ -298,7 +298,33 @@
   //   header("Location:index.html");
   // }
     
-
+  /**
+  * función llenarAdm
+  * Se encarga de llamar la funcion de javascript de cargar los datos correspondientes al primer formulario
+  * definidos en la base de datos en la tabla Form1
+  * @param int id
+  * @param string nombre nombre completo del encuestado
+  * @param string parentesco parentesco del encuestado con el jefe del hogar
+  * @param string estadocivil del encuestado
+  * @param int edad del encuestado
+  * @param int telefono fijo del encuestado
+  * @param int celular del encuestado
+  * @param string direccionnueva de la residencia del encuestado
+  * @param string upz de la residencia del encuestado
+  * @param string barrio de la residencia del encuestado
+  * @param int estrato de la residencia del encuestado
+  * @param int numerohogares numero de los hogares que componen la casa
+  * @param string tiempobarrio tiempo que lleva viviendo en el barrio
+  * @param date fechaEncuesta fecha de la encuesta
+  * @param time HoraInicioEncuesta hora de inicio
+  * @param time HoraFinEncuesta hora de finalizcion
+  * @param string encuestador nombre completo del encuestador
+  * @param string carrera del encuestador
+  * @param string supervisor nombre del supervisor del encuestador
+  * @param string estado si fue completado o no la encuesta
+  * @param string coordinadorProsofi visto bueno de prosofi
+  *
+  */
   function llenarAdm($id, $nombre, $parentesco, $estadocivil, $edad, $genero,  $telefono, $celular, $direccionnueva, $upz, $barrio, $estrato, $numerohogares, $tiempobarrio, $fechaEncuesta, $HoraInicioEncuesta, $HoraFinEncuesta, $encuestador, $carrera, $supervisor, $estado, $coordinadorProsofi ){
     echo('<script>
       cargarForm1("'.$id.'", "'.$nombre.'", "'. $parentesco.'", "'. $estadocivil.'", "'. $edad.'", "'. $genero.'", "'. $telefono.'", "'. $celular.'", "'. $direccionnueva.'", "'. $upz.'", "'. $barrio.'", "'. $estrato.'", "'. $numerohogares.'", "'. $tiempobarrio.'", "'. $fechaEncuesta.'", "'. $HoraInicioEncuesta.'", "'. $HoraFinEncuesta.'", "'. $encuestador.'", "'. $carrera.'", "'. $supervisor.'", "'. $estado.'", "'. $coordinadorProsofi .'");

@@ -145,7 +145,13 @@
   	
   	$id = $_SESSION['usuario']['encuestado'];
 
- 	//buscar si el usuario ya existe para cargar sus datos
+ 	
+  /**
+  * Llamado a la funcion de llenarformulario6 teniendo en cuenta el id/cedula del encuestado
+  * En esta seccion se toman las notas de observaciones y seguimiento 
+  * Se escapan caracteres especiales para evitar generación de escritura basura ininterpretable por los navegadores
+  * @return array[] con los dos campos a leer
+  */
 	  $array = llenarFormulario6( $id );
 	  $Observacion = $array['Observaciones'];
     $Seguimiento = $array['Seguimiento'];
