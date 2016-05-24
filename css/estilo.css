@@ -1,0 +1,12 @@
+body{
+	
+	margin: 2em;
+}
+
+h2, h5{
+	text-align: center;
+}
+
+th{
+	width: 15em;
+}
